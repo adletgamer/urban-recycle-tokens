@@ -5,17 +5,45 @@ import StatCard from "@/components/StatCard";
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
 const materialData = [
-  { name: "Plastic", value: 45, color: "hsl(210, 70%, 50%)" },
-  { name: "Glass", value: 25, color: "hsl(146, 50%, 40%)" },
-  { name: "Paper", value: 20, color: "hsl(40, 80%, 55%)" },
-  { name: "Metal", value: 10, color: "hsl(218, 17%, 40%)" },
+  { name: "Plastic", value: 52, color: "hsl(210, 70%, 50%)", details: "PET (35%), HDPE (25%), Film (20%), Others (20%)" },
+  { name: "Glass", value: 18, color: "hsl(146, 50%, 40%)", details: "Clear (60%), Green/Brown (40%)" },
+  { name: "Paper", value: 22, color: "hsl(40, 80%, 55%)", details: "Cardboard (45%), Newspaper (30%), Mixed (25%)" },
+  { name: "Metals", value: 8, color: "hsl(218, 17%, 40%)", details: "Aluminum Cans (70%), Tin Containers (30%)" },
 ];
 
-const neighborhoodData = [
-  { name: "District A", activity: 85, trend: "+12%" },
-  { name: "District B", activity: 62, trend: "+5%" },
-  { name: "District C", activity: 45, trend: "+18%" },
-  { name: "District D", activity: 38, trend: "+8%" },
+const districtData = [
+  {
+    name: "Miraflores",
+    badge: "Leader in Participation",
+    activeCitizens: 128,
+    kgConverted: "2,850",
+    participationRate: "8.2%",
+    extra: "3 active clean points"
+  },
+  {
+    name: "San Isidro",
+    badge: "Rapid Growth",
+    activeCitizens: 87,
+    kgConverted: "1,920",
+    participationRate: "5.1%",
+    extra: "5 corporate alliances"
+  },
+  {
+    name: "Villa María del Triunfo",
+    badge: "Social Impact",
+    activeCitizens: 76,
+    kgConverted: "1,580",
+    participationRate: "--",
+    extra: "8 formal recyclers, 2 cooperatives"
+  },
+  {
+    name: "Comas",
+    badge: "Growth Potential",
+    activeCitizens: 51,
+    kgConverted: "1,100",
+    participationRate: "--",
+    extra: "12 new users/week"
+  },
 ];
 
 const sdgGoals = [
@@ -41,44 +69,44 @@ const MunicipalDashboard = () => {
               <Building2 className="w-5 h-5 text-tech-blue" />
               <span className="px-2 py-0.5 rounded-full bg-tech-blue/10 text-tech-blue text-xs font-medium">Simulation Mode</span>
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-foreground">
-              City Analytics
+            <h1 className="text-3xl md:text-4xl font-bold text-foreground uppercase">
+              METROPOLITAN LIMA - CONTROL PANEL
             </h1>
             <p className="text-muted-foreground mt-2">
-              Real-time municipal recycling data and SDG compliance tracking
+              Last update: Real-time Simulation | Period: January 2024 - Present (Simulated Data)
             </p>
           </motion.div>
 
           {/* Stats Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             <StatCard
-              title="Total Recycled"
-              value="1,234 tons"
-              subtitle="This month (simulated)"
+              title="Waste Diverted"
+              value="8,450 kg"
+              subtitle="From Landfills"
               icon={BarChart3}
-              trend={{ value: 15, positive: true }}
+              trend={{ value: 12, positive: true }}
               variant="forest"
             />
             <StatCard
-              title="Active Citizens"
-              value="12,500"
-              subtitle="Registered users"
+              title="Participating Citizens"
+              value="342"
+              subtitle="Simulated Users"
               icon={Building2}
-              trend={{ value: 8, positive: true }}
+              trend={{ value: 5, positive: true }}
               variant="tech"
             />
             <StatCard
-              title="Collection Points"
-              value="156"
-              subtitle="IoT enabled"
-              icon={MapPin}
+              title="Formalized Recyclers"
+              value="12"
+              subtitle="Registered Workers"
+              icon={Target}
               variant="forest"
             />
             <StatCard
-              title="SDG Compliance"
-              value="3/3"
-              subtitle="Goals tracked"
-              icon={Target}
+              title="CO2 Emissions Avoided"
+              value="3.2 tons"
+              subtitle="Environmental Impact"
+              icon={BarChart3}
               variant="tech"
             />
           </div>
@@ -108,9 +136,9 @@ const MunicipalDashboard = () => {
                         <Cell key={`cell-${index}`} fill={entry.color} />
                       ))}
                     </Pie>
-                    <Tooltip 
-                      contentStyle={{ 
-                        backgroundColor: 'hsl(var(--card))', 
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: 'hsl(var(--card))',
                         border: '1px solid hsl(var(--border))',
                         borderRadius: '8px',
                         boxShadow: 'var(--shadow-card)'
@@ -119,57 +147,67 @@ const MunicipalDashboard = () => {
                   </PieChart>
                 </ResponsiveContainer>
               </div>
-              <div className="grid grid-cols-2 gap-3 mt-4">
+              <div className="space-y-4 mt-4">
                 {materialData.map((item) => (
-                  <div key={item.name} className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
-                    <span className="text-sm text-muted-foreground">{item.name}</span>
-                    <span className="text-sm font-semibold text-foreground ml-auto">{item.value}%</span>
+                  <div key={item.name} className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
+                      <span className="text-sm font-medium text-foreground">{item.name}</span>
+                      <span className="text-sm font-bold text-foreground ml-auto">{item.value}%</span>
+                    </div>
+                    {item.details && (
+                      <p className="text-xs text-muted-foreground pl-5">{item.details}</p>
+                    )}
                   </div>
                 ))}
               </div>
             </motion.div>
 
-            {/* Neighborhood Participation */}
+            {/* Participation by District */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
               className="bg-card rounded-xl p-6 shadow-card border border-border/50"
             >
-              <h2 className="text-lg font-semibold text-foreground mb-6">Neighborhood Participation</h2>
-              <div className="space-y-4">
-                {neighborhoodData.map((district, index) => (
+              <h2 className="text-lg font-semibold text-foreground mb-6">Participation by District</h2>
+              <div className="space-y-6">
+                {districtData.map((district, index) => (
                   <motion.div
                     key={district.name}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 * index }}
-                    className="space-y-2"
+                    className="space-y-2 pb-4 border-b border-border/20 last:border-0 last:pb-0"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium text-foreground">{district.name}</span>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs text-forest font-medium">{district.trend}</span>
-                        <span className="text-sm text-muted-foreground">{district.activity}%</span>
+                      <div className="flex flex-col">
+                        <span className="text-sm font-bold text-foreground flex items-center gap-2">
+                          {index === 0 && "🏆"} {district.name}
+                        </span>
+                        <span className="text-xs text-tech-blue font-medium">{district.badge}</span>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-sm font-bold text-foreground block">{district.kgConverted} kg</span>
+                        <span className="text-xs text-muted-foreground">recycled/mo</span>
                       </div>
                     </div>
-                    <div className="h-2 bg-muted rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${district.activity}%` }}
-                        transition={{ delay: 0.3 + 0.1 * index, duration: 0.8 }}
-                        className="h-full bg-gradient-hero rounded-full"
-                      />
+
+                    <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground mt-2 bg-muted/30 p-2 rounded-md">
+                      <div>
+                        <span className="block font-medium text-foreground">{district.activeCitizens}</span>
+                        Active Citizens
+                      </div>
+                      <div>
+                        <span className="block font-medium text-foreground">{district.participationRate}</span>
+                        Participation Rate
+                      </div>
+                      <div className="col-span-2 border-t border-border/10 pt-1 mt-1">
+                        <span className="text-forest font-medium">{district.extra}</span>
+                      </div>
                     </div>
                   </motion.div>
                 ))}
-              </div>
-
-              <div className="mt-6 p-4 rounded-lg bg-muted/50">
-                <p className="text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">Demo Data:</span> Real implementation would connect to IoT sensors and blockchain events.
-                </p>
               </div>
             </motion.div>
 
