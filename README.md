@@ -174,17 +174,6 @@ polygon-urbanrecycle/
 └── .env                   # Variables de entorno (NO subir a Git)
 ```
 
-## ⚠️ Importante
-
-- **NUNCA** subas tu archivo `.env` a Git
-- **NUNCA** compartas tu clave privada
-- Usa una cuenta separada con fondos mínimos para desplegar
-- Prueba primero en testnet antes de desplegar en mainnet
-
-## 📞 Soporte
-
-Para preguntas o problemas, revisa la documentación de los contratos en el código fuente.
-
 ## 📄 Licencia
 
 MIT
