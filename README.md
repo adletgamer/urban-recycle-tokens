@@ -159,21 +159,225 @@ npx hardhat verify --network mumbai <CONTRACT_ADDRESS> [CONSTRUCTOR_ARGS]
 - ✅ Modifiers para proteger funciones críticas
 - ✅ Validación de inputs en todas las funciones
 
-## 📚 Estructura del Proyecto
+# Mango Chain
 
-```
-polygon-urbanrecycle/
-├── contracts/
-│   ├── UrbanCoin.sol      # Token ERC-20
-│   ├── WasteNFT.sol       # NFT ERC-721
-│   └── RecycleManager.sol # Contrato orquestador
-├── scripts/
-│   └── deploy.ts          # Script de despliegue
-├── test/                  # Tests (por implementar)
-├── hardhat.config.ts      # Configuración de Hardhat
-└── .env                   # Variables de entorno (NO subir a Git)
+[![Project Status](https://img.shields.io/badge/status-active-brightgreen.svg)](https://github.com/adletgamer/mango-chain)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Contributors](https://img.shields.io/github/contributors/adletgamer/mango-chain.svg)](https://github.com/adletgamer/mango-chain/graphs/contributors)
+
+One-line tagline: A modular, production-ready blockchain application platform focused on secure, scalable, and inclusive decentralized services.
+
+Table of Contents
+- About
+- Elevator Pitch
+- Problem & Solution
+- Key Features
+- Architecture Overview
+- Technology Stack
+- Quick Start
+- Local Development
+- Running Tests & CI
+- Deployment
+- API & Smart Contracts (Summary)
+- Security & Audits
+- Performance & Scaling
+- Monitoring & Metrics
+- Roadmap
+- How to Showcase this Project in Job Applications
+- Suggested CV / LinkedIn Bullets
+- Demo & Interview Tips
+- Contributing
+- License & Contact
+
+About
+---
+Mango Chain is a modular blockchain platform designed to accelerate real-world decentralized applications with a focus on security, performance, and global adoption. It provides developer-friendly tooling, clear upgrade paths, and integration points for web and mobile front-ends.
+
+Elevator Pitch
+---
+Mango Chain lets teams build secure and scalable decentralized applications quickly by combining battle-tested primitives with an intuitive developer experience. It targets financial inclusion, transparent supply chains, and programmable assets with low friction for developers and users worldwide.
+
+Problem & Solution
+---
+Problem:
+- Centralized platforms create single points of failure, lack transparency, and often exclude unbanked populations.
+- Building secure and scalable blockchain solutions remains complex and time-consuming.
+
+Solution:
+- Mango Chain provides a modular, auditable, and developer-centric framework that reduces time-to-market for decentralized applications while prioritizing security and global accessibility.
+
+Key Features
+---
+- Modular architecture for rapid feature composition
+- Transactional smart contract platform with safe upgrade paths
+- Developer tools: CLI, local testnet, SDKs (JavaScript/TypeScript, optionally others)
+- Authentication and wallet integration-ready (e.g., MetaMask, WalletConnect)
+- Local and cloud deployment options (Docker, Kubernetes)
+- CI/CD and automated testing pipelines
+- Observability: metrics, logs, and tracing
+- Internationalization and accessibility-focused client components
+
+Architecture Overview
+---
+High-level components:
+- Consensus & Execution Layer: <<describe consensus (e.g., PoA, Tendermint, Ethereum layer-2, etc.)>>
+- Smart Contracts / Runtime: <<smart contract language and contract repository>>
+- Node / Validator Software: <<node binary or container>>
+- Off-chain Services: Relayers, Indexers, Oracles
+- Client: Web UI, Mobile SDK, and REST / GraphQL APIs
+- Storage & Indexing: Postgres, RocksDB, or preferred indexing solution
+
+(Include architecture diagram: add PNG/SVG in /docs/ or link to design docs.)
+
+Technology Stack (example)
+---
+- Core: <<e.g., Rust / Go / Solidity / Substrate / CosmWasm / Hardhat, etc.>>
+- Runtime & Contracts: <<language>>
+- Frontend: React / Next.js / TypeScript
+- API: Node.js / Express / GraphQL
+- Database: PostgreSQL / Redis / IndexedDB
+- DevOps: Docker, Docker Compose, GitHub Actions, Kubernetes
+- Testing: Jest, Mocha, Hardhat / Truffle / Foundry (contracts), Testcontainers
+
+Quick Start (fill with repo-specific commands)
+---
+Prerequisites
+- Git
+- Node.js >= 16 (if frontend/SDK uses Node)
+- Docker & Docker Compose (recommended)
+- <<other languages/build tools>>
+
+Clone
+```bash
+git clone https://github.com/adletgamer/mango-chain.git
+cd mango-chain
 ```
 
-## 📄 Licencia
+Local dev (example)
+```bash
+# Option A: Docker (recommended)
+docker-compose up --build
+
+# Option B: Local (replace with actual commands)
+cd ./backend
+npm install
+npm run dev
+
+cd ../frontend
+npm install
+npm run dev
+```
+
+Running Tests
+```bash
+# Unit tests
+npm run test
+
+# Smart contract tests (example)
+cd contracts
+npm run test
+```
+
+Running a local testnet
+```bash
+# Example: start a local node
+./scripts/start-local-net.sh
+# Or start local dev chain with docker
+docker-compose -f docker-compose.local.yml up
+```
+
+CI & GitHub Actions
+---
+- CI runs: lint, unit tests, integration (contract) tests, and build.
+- Protect main branch with required checks: unit tests, contract tests, and security scanning.
+
+Deployment
+---
+- Containerized images (Docker) published to registry (Docker Hub / GitHub Container Registry).
+- Cloud deployment options:
+  - Kubernetes cluster (Helm charts)
+  - Managed containers (AWS ECS / GCP Cloud Run)
+  - Frontend hosting: Vercel / Netlify
+- Example Docker build & push:
+```bash
+docker build -t ghcr.io/<owner>/mango-chain:latest .
+docker push ghcr.io/<owner>/mango-chain:latest
+```
+
+API & Smart Contracts (Summary)
+---
+Document the most important endpoints and contract functions here.
+
+Example REST endpoints
+- POST /api/v1/transactions — submit transactions
+- GET /api/v1/accounts/:id — account state
+- GET /api/v1/blocks/:height — block info
+
+Example smart contract functions
+- mint(address, amount)
+- transfer(from, to, amount)
+- setOwner(address)
+
+(Replace with actual contract ABIs and examples. Add full API reference in /docs/api.md or auto-generate with Swagger/OpenAPI.)
+
+Security & Audits
+---
+- Threat model: replay attacks, front-running, oracle manipulation, misconfiguration.
+- Defensive programming: type-safe language where possible, strict linting, code reviews.
+- Key practices:
+  - Unit & integration tests with edge cases
+  - Fuzz testing for contracts (e.g., Foundry / Echidna)
+  - Regular dependency scanning (Dependabot/GitHub security alerts)
+  - External audit recommended before production and before handling real user funds
+
+Performance & Scaling
+---
+- Horizontal scaling for stateless API components
+- Use of batching & indexing for high TPS use-cases
+- Caching strategies (Redis, CDN)
+- Sharding & layer-2 integration strategies (document any planned approaches)
+
+Monitoring & Metrics
+---
+- Expose Prometheus metrics from nodes and services
+- Centralized logging with ELK or Loki
+- Distributed tracing with OpenTelemetry
+- Define SLOs/SLIs (latency, error rate, throughput)
+
+Roadmap
+---
+Short-term
+- Add e2e tests and upgradeable contract patterns
+- CI improvements: parallel contract test matrix
+
+Mid-term
+- Cross-chain bridging support
+- Production-grade observability and alerting
+
+Long-term
+- Governance module
+- Global adoption initiatives and localized client experiences
+
+Contributing
+---
+We welcome contributions. Please follow these steps:
+1. Fork the repo and create a feature branch.
+2. Open a draft PR describing the change and the rationale.
+3. Run tests and linters before submitting (see scripts in package.json).
+4. For security or vulnerability disclosures, contact: <<security@your.org or GitHub security policy link>>.
+
+Code of Conduct
+- This project follows a Code of Conduct. See CODE_OF_CONDUCT.md for more details.
+Appendix — What to add next (high priority)
+---
+- Replace placeholders with concrete commands, contract names, and live demo URLs.
+- Add architecture images in /docs/ and link them here.
+- Add automated OpenAPI / Swagger docs for APIs and publish to /docs/api.md.
+- Add badges for CI, code coverage, and security scans.
+
+Notes for maintainers / reviewers
+---
+This README is designed to be recruiter- and hiring-manager-friendly: it emphasizes impact, technical depth, and demoability. Tailor the "Suggested CV bullets" and "Metrics" with real measured numbers from your repo or test runs to strengthen job applications.
+
 
 MIT
